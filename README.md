@@ -58,6 +58,13 @@ python3 -m pithon --workspace .
 
 The probe reports whether the device Python can bind a loopback listening socket, invoke a-Shell commands through `subprocess`, and whether the bundled SSH client advertises `-R`. Reverse tunnelling remains an experiment: iOS can suspend a-Shell whenever it leaves the foreground.
 
+The real-device concurrency hypothesis uses two a-Shell windows: keep
+`python3 -m pithon.tunnel_probe` in the first and the foreground
+`ssh -N -R ...` process in the second. This remains unverified until both
+survive concurrently on a device. The one-shot probe exposes only a fixed
+success string on phone loopback; it is not a remote-control service. Do not
+background either process or treat the tunnel as persistent.
+
 ## Security model
 
 At startup, Pithon displays and asks approval for one workspace. After approval, the model may read non-blocked files within that root. Common credential paths and names are denied; symlinks and parent traversal are rejected. Provider-bound tool output receives best-effort redaction. Every write displays its complete bounded diff and requires a separate `y` confirmation.
