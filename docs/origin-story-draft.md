@@ -61,12 +61,18 @@ OpenAI's harness-engineering account focuses on making environments legible and 
 - “The coding-agent lifeboat: what survives inside an iPhone sandbox”
 - “No Node, no wheels, no daemon: a useful coding agent in stdlib Python”
 
+## Established real-device evidence
+
+- a-Shell Python 3.13 on an iPhone 13 can bind/listen on loopback and invoke its OpenSSH 8.5 client through `subprocess`.
+- The bundled SSH client parses `-R`, and key-only SSH reaches a tailnet-only hardened Mac by direct Tailscale IP.
+- A foreground single-process probe established `Mac 127.0.0.1:49321 → SSH -R → phone 127.0.0.1:49320` and returned the fixed `PITHON_PHONE_OK` payload.
+- `PermitListen localhost:*` matches `-R localhost:…`, not a literal `-R 127.0.0.1:…`; the failed first attempt became an executable regression.
+
 ## Claims requiring evidence before publication
 
 - Real a-Shell DeepSeek tool loop on an iPhone 13.
-- Measured cache-hit behavior across several turns.
+- Measured DeepSeek cache-hit behavior across several turns.
 - Measured PocketPal performance for LFM2.5-1.2B and Qwen3-1.7B.
-- Whether a-Shell's SSH client supports `-R`.
-- Whether Python loopback listening remains alive while a-Shell is foregrounded/backgrounded.
-- End-to-end phone-to-Mac and Mac-to-phone experimental latency.
+- Reverse-tunnel survival across app switching, screen lock, and iOS suspension.
+- End-to-end tunnel latency measured without human coordination delay.
 - Exact similarities and incompatibilities with upstream Pi.

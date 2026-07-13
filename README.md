@@ -56,7 +56,7 @@ python3 -m pithon.probe
 python3 -m pithon --workspace .
 ```
 
-The probe reports whether the device Python can bind a loopback listening socket, invoke a-Shell commands through `subprocess`, and whether the bundled SSH client advertises `-R`. Reverse tunnelling remains an experiment: iOS can suspend a-Shell whenever it leaves the foreground.
+The probe reports whether the device Python can bind a loopback listening socket, invoke a-Shell commands through `subprocess`, and whether the bundled SSH client advertises `-R`. Those capabilities and one foreground reverse-tunnel round trip are verified on an iPhone 13 running iOS 26.5.2 with a-Shell's Python 3.13/OpenSSH 8.5. Background survival remains unverified because iOS may suspend a-Shell.
 
 The real-device reverse-tunnel probe keeps both loopback listener and outbound
 SSH client under one Python process:
