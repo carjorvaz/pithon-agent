@@ -38,7 +38,7 @@ class TunnelProbeTests(unittest.TestCase):
         self.assertIn("StrictHostKeyChecking=yes", command)
         self.assertEqual(
             command[command.index("-R") + 1],
-            "127.0.0.1:49321:127.0.0.1:49320",
+            "localhost:49321:127.0.0.1:49320",
         )
         self.assertEqual(command[-1], "cjv@100.75.134.73")
 

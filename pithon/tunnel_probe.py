@@ -63,7 +63,7 @@ def build_reverse_command(
         "-i",
         str(identity),
         "-R",
-        f"127.0.0.1:{remote_port}:127.0.0.1:{local_port}",
+        f"localhost:{remote_port}:127.0.0.1:{local_port}",
         destination,
     ]
 
