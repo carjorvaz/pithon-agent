@@ -11,7 +11,7 @@ Pithon sends approved prompts and file excerpts to a remote model and lets that 
 - Writes use same-directory temporary files plus atomic replacement.
 - Complete diffs are displayed before mutation; oversized diffs fail closed.
 - Every mutation requires a fresh user confirmation.
-- API keys are read from an interactive hidden prompt or process environment.
+- API keys are read from an interactive hidden prompt, process environment, or a safely opened mode-restricted one-shot file that is deleted before network use.
 - No shell/command tool, inbound server, plugin loading, or autonomous network fetch tool.
 - Session persistence is opt-in, mode `0600`, and ignored by Git.
 - Provider output and rounds are bounded.

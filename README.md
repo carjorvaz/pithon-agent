@@ -26,7 +26,15 @@ Requires Python 3.9 or newer and a DeepSeek API key. From a clone:
 python3 -m pithon --workspace /path/to/project
 ```
 
-If `DEEPSEEK_API_KEY` is absent in an interactive terminal, Pithon asks for it without storing it. Environment configuration is also supported:
+If `DEEPSEEK_API_KEY` is absent in an interactive terminal, Pithon asks for it without storing it.
+
+For terminals whose hidden-input mode is incompatible with `getpass`, use
+`--consume-api-key-file PATH`. Pithon opens the file without following
+symlinks, requires current-user ownership with no group/other permissions,
+reads it once, and deletes it before the first provider request. Keep this
+temporary file outside the workspace.
+
+Environment configuration is also supported:
 
 ```sh
 export DEEPSEEK_API_KEY='...'
