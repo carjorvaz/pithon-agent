@@ -3,6 +3,7 @@ from __future__ import annotations
 import socket
 import threading
 import unittest
+from pathlib import Path
 
 from pithon import tunnel_probe
 
@@ -25,6 +26,21 @@ class TunnelProbeTests(unittest.TestCase):
             self.assertEqual(client.recv(1024), b"PITHON_PHONE_OK\n")
         thread.join(timeout=2)
         self.assertFalse(thread.is_alive())
+
+    def test_reverse_command_is_noninteractive_and_loopback_only(self) -> None:
+        command = tunnel_probe.build_reverse_command(
+            "ssh",
+            Path(".ssh/pithon_mac"),
+            "cjv@100.75.134.73",
+        )
+        self.assertEqual(command[:4], ["ssh", "-4", "-N", "-T"])
+        self.assertIn("BatchMode=yes", command)
+        self.assertIn("StrictHostKeyChecking=yes", command)
+        self.assertEqual(
+            command[command.index("-R") + 1],
+            "127.0.0.1:49321:127.0.0.1:49320",
+        )
+        self.assertEqual(command[-1], "cjv@100.75.134.73")
 
 
 if __name__ == "__main__":
